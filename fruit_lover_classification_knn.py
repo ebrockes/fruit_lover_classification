@@ -49,7 +49,8 @@ ax.set_zlabel('color_score')
 plt.show()
 
 #create classifier object 
-knn = KNeighborsClassifier(n_neighbors = 5)
+#knn = KNeighborsClassifier(n_neighbors = 5)
+knn = KNeighborsClassifier(algorithm = 'auto', leaf_size=10, metric='minkowski', metric_params=None, n_jobs=1, n_neighbors=5, p=2, weights='uniform')
 
 #train the classifier
 knn.fit(X_train, y_train)
