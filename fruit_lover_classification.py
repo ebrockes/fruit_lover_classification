@@ -55,10 +55,6 @@ ax.set_ylabel('height')
 ax.set_zlabel('color_score')
 plt.show()
 
-scaler = MinMaxScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
 
 logreg = LogisticRegression()
 logreg.fit(X_train, y_train)
@@ -69,9 +65,9 @@ clf = DecisionTreeClassifier().fit(X_train, y_train)
 print('Accuracy of Decision Tree classifier on training set: {:.2f}'.format(clf.score(X_train, y_train)))
 print('Accuracy of Decision Tree classifier on test set: {:.2f}'.format(clf.score(X_test, y_test)))
 
-#knn = KNeighborsClassifier(n_neighbors = 5)
 knn = KNeighborsClassifier(algorithm = 'auto', leaf_size=10, metric='minkowski', metric_params=None, n_jobs=1, n_neighbors=5, p=2, weights='uniform')
 knn.fit(X_train, y_train)
+print('K-NN classifier (metric=minkowski, n_neighbors=5, p=2)')
 print('Accuracy of K-NN classifier on training set: {:.2f}'.format(knn.score(X_train, y_train)))
 print('Accuracy of K-NN classifier on test set: {:.2f}'.format(knn.score(X_test, y_test)))
 
@@ -94,7 +90,8 @@ print('Accuracy of SVM classifier on test set: {:.2f}'.format(svm.score(X_test, 
 k_range = range(1, 20)
 scores = []
 for k in k_range:
-    knn = KNeighborsClassifier(n_neighbors = k)
+    #knn = KNeighborsClassifier(n_neighbors = k)
+    knn = KNeighborsClassifier(algorithm = 'auto', leaf_size=10, metric='minkowski', metric_params=None, n_jobs=1, n_neighbors=k, p=2, weights='uniform')
     knn.fit(X_train, y_train)
     scores.append(knn.score(X_test, y_test))
 plt.figure()
@@ -104,9 +101,13 @@ plt.scatter(k_range, scores)
 plt.xticks([0,5,10,15,20])
 plt.show()
 
-print("############ Preditions for K-NN")
+print("############ Preditions for DecisionTree - best accuracy")
 #Use the trained k-NN classifier model to classify new, previously unseen objects
-fruit_prediction = knn.predict([[20, 4.3, 5.5, 0.9]])
-print('[20, 4.3, 5.5, 0.9]: ' + lookup_fruit_name[fruit_prediction[0]])
-fruit_prediction = knn.predict([[100, 6.3, 8.5, 0.70]])
-print('[100, 6.3, 8.5, 0.1]: ' + lookup_fruit_name[fruit_prediction[0]])
+fruit_prediction = clf.predict([[20, 4.3, 5.5, 0.90]])
+print('[20, 4.3, 5.5, 0.90]: ' + lookup_fruit_name[fruit_prediction[0]])
+fruit_prediction = clf.predict([[100, 6.3, 8.5, 0.70]])
+print('[100, 6.3, 8.5, 0.70]: ' + lookup_fruit_name[fruit_prediction[0]])
+fruit_prediction = clf.predict([[192,8.4,7.3,0.55]])
+print('[192,8.4,7.3,0.55]: ' + lookup_fruit_name[fruit_prediction[0]])
+fruit_prediction = clf.predict([[86,6.2,4.7,0.80]])
+print('[86,6.2,4.7,0.80]: ' + lookup_fruit_name[fruit_prediction[0]])
