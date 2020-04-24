@@ -108,5 +108,5 @@ print("############ Preditions for K-NN")
 #Use the trained k-NN classifier model to classify new, previously unseen objects
 fruit_prediction = knn.predict([[20, 4.3, 5.5, 0.9]])
 print('[20, 4.3, 5.5, 0.9]: ' + lookup_fruit_name[fruit_prediction[0]])
-fruit_prediction = knn.predict([[100, 6.3, 8.5, 0.1]])
+fruit_prediction = knn.predict([[100, 6.3, 8.5, 0.70]])
 print('[100, 6.3, 8.5, 0.1]: ' + lookup_fruit_name[fruit_prediction[0]])
