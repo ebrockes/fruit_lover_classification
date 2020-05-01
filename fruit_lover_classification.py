@@ -90,8 +90,7 @@ print('Accuracy of SVM classifier on test set: {:.2f}'.format(svm.score(X_test, 
 k_range = range(1, 20)
 scores = []
 for k in k_range:
-    #knn = KNeighborsClassifier(n_neighbors = k)
-    knn = KNeighborsClassifier(algorithm = 'auto', leaf_size=10, metric='minkowski', metric_params=None, n_jobs=1, n_neighbors=k, p=2, weights='uniform')
+    knn = KNeighborsClassifier(n_neighbors = k)
     knn.fit(X_train, y_train)
     scores.append(knn.score(X_test, y_test))
 plt.figure()
