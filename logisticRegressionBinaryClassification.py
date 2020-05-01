@@ -41,8 +41,11 @@ print('# classification report')
 print(report)
 print('# confusion_matrix')
 print(conf_m)
-print('# _score')
-print(score_)
+
+print('Accuracy of Logistic regression classifier on training set: {:.2f}'
+     .format(model.score(X_train, y_train)))
+print('Accuracy of Logistic regression classifier on test set: {:.2f}'
+     .format(model.score(X_test, y_test)))
 
 logit_roc_auc = roc_auc_score(y_test, model.predict(X_test))
 fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
@@ -57,3 +60,5 @@ plt.title('Apple identification (LogisticRegression)')
 plt.legend(loc="lower right")
 plt.savefig('Log_ROC')
 plt.show()
+
+fig, subaxes = plt.subplots(1, 1, figsize=(7, 5))
