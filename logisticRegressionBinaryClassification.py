@@ -46,6 +46,9 @@ print('Accuracy of Logistic regression classifier on training set: {:.2f}'
      .format(model.score(X_train, y_train)))
 print('Accuracy of Logistic regression classifier on test set: {:.2f}'
      .format(model.score(X_test, y_test)))
+     
+print('A fruit with mass 192 and width 8.4 and height 7.3 and color_score 0.55 is predicted to be: {}'
+     .format(['not an apple', 'an apple'][model.predict([[192,8.4,7.3,0.55]])[0]]))
 
 logit_roc_auc = roc_auc_score(y_test, model.predict(X_test))
 fpr, tpr, thresholds = roc_curve(y_test, model.predict_proba(X_test)[:,1])
@@ -60,5 +63,3 @@ plt.title('Apple identification (LogisticRegression)')
 plt.legend(loc="lower right")
 plt.savefig('Log_ROC')
 plt.show()
-
-fig, subaxes = plt.subplots(1, 1, figsize=(7, 5))
